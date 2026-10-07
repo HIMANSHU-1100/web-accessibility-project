@@ -16,9 +16,9 @@
 
 ## Audit Summary
 
-The India.gov.in website received an accessibility score of 85/100 in the Lighthouse audit.
+The India.gov.in website received an accessibility score of **85/100** in the Lighthouse audit.
 
-The audit identified issues related to ARIA structure, hidden focusable elements, color contrast, and semantic HTML structure.
+The audit identified issues related to ARIA structure, hidden focusable elements, color contrast, semantic HTML structure, and automated accessibility testing.
 
 A manual keyboard-only navigation test was also performed.
 
@@ -54,7 +54,7 @@ Use the correct parent-child structure for ARIA roles. Where possible, use nativ
 
 ---
 
-### 2. Focusable Elements Inside aria-hidden="true"
+### 2. Focusable Elements Inside `aria-hidden="true"`
 
 **Issue:**  
 Focusable elements were found inside elements marked with `aria-hidden="true"`.
