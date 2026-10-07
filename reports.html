@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Accessible enterprise dashboard reports">
+  <title>Enterprise Dashboard | Reports</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="brand"><a href="index.html" aria-label="Enterprise Dashboard home">Enterprise Dashboard</a></div>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="users.html">Users</a></li>
+        <li><a href="reports.html" aria-current="page">Reports</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="menu-button" aria-label="Open navigation menu" aria-expanded="false">Menu</button>
+  </header>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Dashboard sidebar">
+      <h2>Workspace</h2>
+      <nav aria-label="Workspace navigation">
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="users.html">User management</a></li>
+          <li><a href="reports.html" aria-current="page">Reports</a></li>
+          <li><a href="settings.html">Account settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main id="main-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Analytics</p>
+          <h1>Reports</h1>
+          <p>Review operational reports and their status.</p>
+        </div>
+      </header>
+      <section aria-labelledby="reports-heading">
+        <h2 id="reports-heading">Available reports</h2>
+        <div class="table-wrapper">
+          <table>
+            <caption>Generated enterprise reports</caption>
+            <thead>
+              <tr><th scope="col">Report</th><th scope="col">Created</th><th scope="col">Owner</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Monthly activity</td><td><time datetime="2026-10-01">1 Oct 2026</time></td><td>Priya Sharma</td><td><span class="status success">Ready</span></td></tr>
+              <tr><td>Access review</td><td><time datetime="2026-10-04">4 Oct 2026</time></td><td>Neha Verma</td><td><span class="status warning">Review</span></td></tr>
+              <tr><td>Performance summary</td><td><time datetime="2026-10-06">6 Oct 2026</time></td><td>Arjun Singh</td><td><span class="status info">Processing</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section aria-labelledby="request-heading">
+        <h2 id="request-heading">Request a custom report</h2>
+        <form class="content-card" action="#" method="post">
+          <fieldset>
+            <legend>Report details</legend>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="reportName">Report name</label>
+                <input id="reportName" name="reportName" type="text" required minlength="3">
+              </div>
+              <div class="form-field">
+                <label for="reportFormat">Format</label>
+                <select id="reportFormat" name="reportFormat" required>
+                  <option value="">Choose a format</option>
+                  <option value="pdf">PDF</option>
+                  <option value="csv">CSV</option>
+                  <option value="xlsx">Excel</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="reportDescription">Description</label>
+              <textarea id="reportDescription" name="reportDescription" rows="5" required></textarea>
+            </div>
+          </fieldset>
+          <button class="button primary" type="submit">Submit request</button>
+        </form>
+      </section>
+    </main>
+  </div>
+  <footer class="site-footer"><p>&copy; 2026 Enterprise Dashboard. Accessible by design.</p></footer>
+  <script src="js/app.js" defer></script>
+</body>
+</html>

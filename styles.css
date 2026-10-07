@@ -1,0 +1,100 @@
+* { box-sizing: border-box; }
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #172033;
+  background: #f6f8fb;
+  line-height: 1.5;
+}
+
+body { margin: 0; min-height: 100vh; }
+a { color: #075985; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  padding: .75rem 1rem;
+  background: #172033;
+  color: #fff;
+  z-index: 100;
+}
+.skip-link:focus { top: 1rem; }
+
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 1px solid #d8dee8;
+}
+.brand a { font-weight: 700; text-decoration: none; color: #172033; }
+.site-header nav { flex: 1; }
+.site-header nav ul, .sidebar ul { display: flex; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+.site-header nav a, .sidebar a { text-decoration: none; font-weight: 600; }
+.menu-button { display: none; }
+
+.layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 73px); }
+.sidebar { padding: 2rem 1.25rem; background: #eef2f7; border-right: 1px solid #d8dee8; }
+.sidebar nav ul { display: grid; gap: .75rem; }
+.sidebar a[aria-current="page"], .site-header a[aria-current="page"] { text-decoration: underline; text-underline-offset: .25rem; }
+
+main { max-width: 1200px; width: 100%; padding: 2rem; margin: 0 auto; }
+.page-header, .section-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+.eyebrow { margin: 0 0 .25rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; }
+h1, h2, h3 { line-height: 1.2; }
+.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.metric-card, .content-card { background: #fff; border: 1px solid #d8dee8; border-radius: .5rem; padding: 1.25rem; }
+.metric-value { font-size: 2rem; font-weight: 700; margin: .5rem 0; }
+.table-wrapper { overflow-x: auto; margin-bottom: 2rem; }
+table { width: 100%; border-collapse: collapse; background: #fff; }
+caption { text-align: left; font-weight: 700; padding: 0 0 .75rem; }
+th, td { padding: .9rem; border: 1px solid #cbd5e1; text-align: left; }
+th { background: #e8edf4; }
+.status { display: inline-block; padding: .2rem .55rem; border-radius: 999px; font-weight: 700; }
+.success { background: #dcfce7; color: #166534; }
+.info { background: #dbeafe; color: #1e40af; }
+.warning { background: #fef3c7; color: #92400e; }
+
+.button {
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: .4rem;
+  padding: .65rem 1rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+.primary { background: #075985; color: #fff; }
+.secondary { background: #fff; color: #075985; border-color: #075985; }
+
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.form-field { display: grid; gap: .4rem; margin-bottom: 1rem; }
+label, legend { font-weight: 700; }
+input, select, textarea { width: 100%; padding: .7rem; border: 1px solid #64748b; border-radius: .35rem; font: inherit; background: #fff; }
+fieldset { border: 1px solid #cbd5e1; border-radius: .4rem; padding: 1rem; margin: 0 0 1.25rem; }
+legend { padding: 0 .35rem; }
+.checkbox-field { display: flex; gap: .6rem; align-items: flex-start; margin: .75rem 0; }
+.checkbox-field input { width: auto; margin-top: .35rem; }
+
+.site-footer { padding: 1.5rem 2rem; background: #172033; color: #fff; }
+dialog { width: min(90vw, 520px); border: 0; border-radius: .6rem; padding: 0; box-shadow: 0 1rem 3rem rgb(0 0 0 / .25); }
+dialog::backdrop { background: rgb(0 0 0 / .55); }
+.dialog-content { padding: 1.5rem; }
+.dialog-actions { display: flex; justify-content: flex-end; gap: .75rem; margin-top: 1rem; }
+
+@media (max-width: 800px) {
+  .site-header { flex-wrap: wrap; }
+  .site-header nav { order: 3; width: 100%; }
+  .site-header nav ul { flex-wrap: wrap; }
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { border-right: 0; border-bottom: 1px solid #d8dee8; }
+  .metric-grid, .form-grid { grid-template-columns: 1fr; }
+  .page-header, .section-heading { flex-direction: column; }
+}

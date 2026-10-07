@@ -1,68 +1,42 @@
-# Web Accessibility & Architecture Project
+# Semantic HTML5 & Accessible Component Architecture
 
-## Project Overview
+This project is an accessible multi-page enterprise dashboard foundation built with semantic HTML5 and WCAG 2.1-oriented practices.
 
-This project demonstrates a web accessibility audit and a monorepo-style
-project architecture.
+## Pages
 
-The project includes an accessibility audit of a public-facing website,
-evidence of identified issues, and a setup-ready structure for a
-frontend and backend web application.
+- `index.html` — dashboard overview, metrics, activity table, and modal dialog
+- `users.html` — user management, data table, filters, and invitation modal
+- `reports.html` — reports table and accessible report request form
+- `settings.html` — profile and notification settings form
 
----
+## Accessibility practices
 
-## Website Audited
+- Semantic landmarks: `header`, `nav`, `main`, `section`, `article`, `aside`, and `footer`
+- Skip link for keyboard users
+- Visible keyboard focus indicators
+- `aria-current` for active navigation
+- Explicit form labels associated with controls
+- `fieldset` and `legend` for related controls
+- Native HTML validation with `required`, `type`, `minlength`, and `pattern`
+- Accessible data tables with captions and `scope="col"`
+- Native `<dialog>` modal with labelled heading
+- Responsive layout and readable document hierarchy
 
-**Website:** https://www.india.gov.in/
+## Local setup
 
-**Audit Tool:** Google Lighthouse
+No build step is required. Open `index.html` in a browser, or serve the folder with any static HTTP server.
 
-**Accessibility Score:** 85/100
+Example:
 
-A keyboard-only navigation test was also performed to manually verify
-keyboard accessibility.
+```bash
+python -m http.server 8000
+```
 
----
+Then open `http://localhost:8000/`.
 
-## Accessibility Audit
+## Validation
 
-The audit identified four accessibility issues:
+Validate every HTML page with the W3C Nu HTML Checker before submission:
+https://validator.w3.org/nu/
 
-| # | Issue | Severity | Priority |
-|---|---|---|---|
-| 1 | Incorrect ARIA role hierarchy | High | P1 |
-| 2 | Focusable elements inside `aria-hidden="true"` | High | P1 |
-| 3 | Insufficient color contrast | High | P1 |
-| 4 | Incorrect list item structure | Medium | P2 |
-
-The keyboard-only navigation test passed, with focus moving through
-interactive elements in a logical order.
-
-For detailed findings, evidence, and recommended fixes, see:
-
-`docs/accessibility-audit.md`
-
----
-
-## Project Structure
-
-```text
-web-accessibility-project/
-│
-├── client/
-│   └── Frontend application
-│
-├── server/
-│   └── Backend application and APIs
-│
-├── docs/
-│   ├── accessibility-audit.md
-│   └── architecture.md
-│
-├── tests/
-│   └── Automated and manual test files
-│
-├── screenshots/
-│   └── Accessibility audit evidence
-│
-└── README.md
+Record the validation result/screenshots as submission evidence.
