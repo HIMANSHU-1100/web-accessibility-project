@@ -40,3 +40,22 @@ Validate every HTML page with the W3C Nu HTML Checker before submission:
 https://validator.w3.org/nu/
 
 Record the validation result/screenshots as submission evidence.
+
+
+## Task 5: Dynamic JavaScript DOM Logic & RESTful API Client
+
+- `products.html` provides a product catalogue using the public FakeStore API.
+- `js/api.js` contains the asynchronous API client, response validation, and short-lived `localStorage` cache.
+- `js/app.js` handles rendering, live search, category filtering, sorting, loading states, retry/error UI, and saved sort preferences.
+- Product cards are created with DOM APIs and text content rather than inserting API text as HTML.
+- The catalogue keeps the dashboard's semantic structure, labelled controls, live status announcements, visible keyboard focus, responsive layout, and theme preference.
+
+### Run locally
+
+From the project root, run:
+
+```bash
+python -m http.server 8000
+```
+
+Open `http://localhost:8000/products.html`. An internet connection is required to fetch fresh FakeStore API data. Cached results are retained for up to five minutes when available.

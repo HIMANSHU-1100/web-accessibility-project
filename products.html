@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Browse and filter products using a live REST API in the accessible enterprise dashboard">
+  <title>Enterprise Dashboard | Products</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="brand"><a href="index.html" aria-label="Enterprise Dashboard home">Enterprise Dashboard</a></div>
+    <nav aria-label="Primary navigation">
+      <ul>
+        <li><a href="index.html">Overview</a></li>
+        <li><a href="users.html">Users</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="products.html" aria-current="page">Products</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">Dark mode</button>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Dashboard sidebar">
+      <h2>Workspace</h2>
+      <nav aria-label="Workspace navigation">
+        <ul>
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="users.html">User management</a></li>
+          <li><a href="reports.html">Reports</a></li>
+          <li><a href="products.html" aria-current="page">Products</a></li>
+          <li><a href="settings.html">Account settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main id="main-content">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Live REST API</p>
+          <h1>Product catalogue</h1>
+          <p>Browse live product data. Search, filter by category, and sort results without reloading the page.</p>
+        </div>
+        <button type="button" class="button secondary" id="refreshProducts">Refresh data</button>
+      </header>
+
+      <section aria-labelledby="catalogue-heading">
+        <h2 id="catalogue-heading">Explore products</h2>
+        <div class="catalogue-controls content-card">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="productSearch">Search products</label>
+              <input id="productSearch" type="search" placeholder="Search by product name or description" autocomplete="off">
+            </div>
+            <div class="form-field">
+              <label for="productSort">Sort results</label>
+              <select id="productSort">
+                <option value="default">Recommended order</option>
+                <option value="title-asc">Name: A to Z</option>
+                <option value="title-desc">Name: Z to A</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="rating-desc">Rating: highest first</option>
+              </select>
+            </div>
+          </div>
+          <div class="category-area">
+            <h3>Filter by category</h3>
+            <div id="productCategories" class="category-tabs" role="group" aria-label="Product categories">
+              <button type="button" class="category-tab is-active" data-category="all" aria-pressed="true">All products</button>
+            </div>
+          </div>
+        </div>
+        <p id="productStatus" class="result-status" role="status" aria-live="polite">Preparing to load products…</p>
+        <div id="productError" class="error-panel" role="alert" hidden>
+          <h3>We couldn't load the products</h3>
+          <p id="productErrorMessage">Check your internet connection and try again.</p>
+          <button type="button" class="button primary" id="retryProducts">Try again</button>
+        </div>
+        <div id="productGrid" class="product-grid" aria-label="Product results" aria-busy="true"></div>
+      </section>
+      <p class="api-attribution">Demo data provided by <a href="https://fakestoreapi.com/" target="_blank" rel="noopener noreferrer">FakeStore API</a>.</p>
+    </main>
+  </div>
+
+  <footer class="site-footer"><p>&copy; 2026 Enterprise Dashboard. Accessible by design.</p></footer>
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
