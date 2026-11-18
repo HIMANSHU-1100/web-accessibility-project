@@ -209,7 +209,9 @@ document.addEventListener("DOMContentLoaded", () => {
       errorPanel.hidden = true;
       renderCategories();
       renderProducts();
-      if (productsResult.source === "cache" || categoriesResult.source === "cache") {
+      if (productsResult.source === "stale-cache" || categoriesResult.source === "stale-cache") {
+        status.textContent += " Live data is unavailable; showing previously saved data.";
+      } else if (productsResult.source === "cache" || categoriesResult.source === "cache") {
         status.textContent += " Recently cached data.";
       }
     } catch (error) {

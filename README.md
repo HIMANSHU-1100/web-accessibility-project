@@ -45,8 +45,10 @@ Record the validation result/screenshots as submission evidence.
 ## Task 5: Dynamic JavaScript DOM Logic & RESTful API Client
 
 - `products.html` provides a product catalogue using the public FakeStore API.
-- `js/api.js` contains the asynchronous API client, response validation, and short-lived `localStorage` cache.
-- `js/app.js` handles rendering, live search, category filtering, sorting, loading states, retry/error UI, and saved sort preferences.
+- `js/api.js` contains the asynchronous API client, response validation, a five-minute fresh `localStorage` cache, and fallback to the last successful cached response if the live API is unavailable.
+- `js/app.js` handles rendering, live search, category filtering, sorting, loading skeletons, retry/error UI, and saved sort preferences.
+- The shared dashboard theme preference is also stored in `localStorage` (`dashboard-theme`).
+- Product sorting preference is stored in `localStorage` (`dashboard-product-sort`).
 - Product cards are created with DOM APIs and text content rather than inserting API text as HTML.
 - The catalogue keeps the dashboard's semantic structure, labelled controls, live status announcements, visible keyboard focus, responsive layout, and theme preference.
 
@@ -58,4 +60,4 @@ From the project root, run:
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000/products.html`. An internet connection is required to fetch fresh FakeStore API data. Cached results are retained for up to five minutes when available.
+Open `http://localhost:8000/products.html`. An internet connection is required to fetch fresh FakeStore API data. Successful API responses are considered fresh for five minutes. If a later request fails, the application can display the last successfully cached product/category data instead of immediately failing. Theme and sorting preferences persist in `localStorage`.

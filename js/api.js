@@ -1,6 +1,6 @@
 /* REST API client for the product catalogue.
- * Uses localStorage as a short-lived cache so a recent successful response
- * can still be displayed when the API is temporarily unavailable.
+ * Uses localStorage for a five-minute fresh cache and falls back to the last
+ * successful response if a later network request fails.
  */
 (() => {
   "use strict";
@@ -17,9 +17,11 @@
       const raw = localStorage.getItem(key);
       if (!raw) return null;
       const cached = JSON.parse(raw);
-      if (!cached || !cached.savedAt || !Array.isArray(cached.data)) return null;
-      if (Date.now() - cached.savedAt > CACHE_TTL_MS) return null;
-      return cached.data;
+      if (!cached || !Number.isFinite(cached.savedAt) || !Array.isArray(cached.data)) return null;
+      return {
+        data: cached.data,
+        isFresh: Date.now() - cached.savedAt <= CACHE_TTL_MS
+      };
     } catch (error) {
       console.warn("Unable to read cached API data:", error);
       return null;
@@ -48,25 +50,45 @@
   }
 
   async function getProducts({ forceRefresh = false, signal } = {}) {
-    if (!forceRefresh) {
-      const cached = readCache(CACHE_KEYS.products);
-      if (cached) return { data: cached, source: "cache" };
+    const cached = readCache(CACHE_KEYS.products);
+    if (!forceRefresh && cached?.isFresh) {
+      return { data: cached.data, source: "cache" };
     }
-    const data = await requestJson("/products", signal);
-    if (!Array.isArray(data)) throw new Error("The product service returned an unexpected response.");
-    writeCache(CACHE_KEYS.products, data);
-    return { data, source: "api" };
+
+    try {
+      const data = await requestJson("/products", signal);
+      if (!Array.isArray(data)) throw new Error("The product service returned an unexpected response.");
+      writeCache(CACHE_KEYS.products, data);
+      return { data, source: "api" };
+    } catch (error) {
+      if (error.name === "AbortError") throw error;
+      if (cached?.data.length) {
+        console.warn("Live products are unavailable; using previously cached products.", error);
+        return { data: cached.data, source: "stale-cache" };
+      }
+      throw error;
+    }
   }
 
   async function getCategories({ forceRefresh = false, signal } = {}) {
-    if (!forceRefresh) {
-      const cached = readCache(CACHE_KEYS.categories);
-      if (cached) return { data: cached, source: "cache" };
+    const cached = readCache(CACHE_KEYS.categories);
+    if (!forceRefresh && cached?.isFresh) {
+      return { data: cached.data, source: "cache" };
     }
-    const data = await requestJson("/products/categories", signal);
-    if (!Array.isArray(data)) throw new Error("The category service returned an unexpected response.");
-    writeCache(CACHE_KEYS.categories, data);
-    return { data, source: "api" };
+
+    try {
+      const data = await requestJson("/products/categories", signal);
+      if (!Array.isArray(data)) throw new Error("The category service returned an unexpected response.");
+      writeCache(CACHE_KEYS.categories, data);
+      return { data, source: "api" };
+    } catch (error) {
+      if (error.name === "AbortError") throw error;
+      if (cached?.data.length) {
+        console.warn("Live categories are unavailable; using previously cached categories.", error);
+        return { data: cached.data, source: "stale-cache" };
+      }
+      throw error;
+    }
   }
 
   window.ProductAPI = Object.freeze({ getProducts, getCategories });
